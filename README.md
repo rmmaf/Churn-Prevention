@@ -51,6 +51,7 @@ Four classifiers are trained with hyperparameters optimized via **Optuna** (5-fo
 
 ```
 ├── churn_model.ipynb      # Full pipeline: EDA, feature engineering, modeling, evaluation
+├── churn_model.html       # HTML export of the notebook (outputs only, no source code)
 ├── data/
 │   ├── data.rar           # Compressed dataset (must be extracted before running)
 │   ├── derivative_churn.png
@@ -58,6 +59,8 @@ Four classifiers are trained with hyperparameters optimized via **Optuna** (5-fo
 ├── requirements.txt
 └── README.md
 ```
+
+> **Quick view:** [`churn_model.html`](churn_model.html) is a static HTML export of the notebook containing all outputs, visualizations, and results — without source code. You can open it directly in a browser to review the full analysis without running anything.
 
 ## Getting Started
 
