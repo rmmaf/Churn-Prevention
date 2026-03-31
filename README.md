@@ -19,12 +19,14 @@ Raw transaction data is aggregated into weekly time series per retailer. Three m
 
 This produces 4 final features used for classification:
 
-| Feature | Description |
-|---|---|
+
+| Feature                               | Description                                                         |
+| ------------------------------------- | ------------------------------------------------------------------- |
 | `zscore_mov_avg_d_tx_sum_per_day_est` | Z-score of the moving-average derivative of daily transaction value |
-| `mean_est_mov_avg_d_tx_day_count` | Mean of the moving-average derivative of active-day count |
-| `mov_avg_d_tx_day_count` | Latest moving-average derivative of active-day count |
-| `std_est_mov_avg_d_tx_day_count` | Std. deviation of the moving-average derivative of active-day count |
+| `mean_est_mov_avg_d_tx_day_count`     | Mean of the moving-average derivative of active-day count           |
+| `mov_avg_d_tx_day_count`              | Latest moving-average derivative of active-day count                |
+| `std_est_mov_avg_d_tx_day_count`      | Std. deviation of the moving-average derivative of active-day count |
+
 
 ### Models
 
@@ -38,12 +40,14 @@ Four classifiers are trained with hyperparameters optimized via **Optuna** (5-fo
 
 ## Results
 
-| Metric | Random Forest | XGBoost | Extra Trees | Hard Voting | Soft Voting |
-|---|---|---|---|---|---|
-| **Accuracy** | 97.46% | **97.58%** | 97.09% | 97.34% | 97.22% |
-| **Precision (Churn)** | 91.87% | **92.62%** | 91.67% | 91.80% | 92.44% |
-| **Recall (Churn)** | **91.13%** | **91.13%** | 88.71% | 90.32% | 88.71% |
-| **F1-Score (Churn)** | 91.50% | **91.87%** | 90.16% | 91.06% | 90.54% |
+
+| Metric                | Random Forest | XGBoost    | Extra Trees | Hard Voting | Soft Voting |
+| --------------------- | ------------- | ---------- | ----------- | ----------- | ----------- |
+| **Accuracy**          | 97.46%        | **97.58%** | 97.09%      | 97.34%      | 97.22%      |
+| **Precision (Churn)** | 91.87%        | **92.62%** | 91.67%      | 91.80%      | 92.44%      |
+| **Recall (Churn)**    | **91.13%**    | **91.13%** | 88.71%      | 90.32%      | 88.71%      |
+| **F1-Score (Churn)**  | 91.50%        | **91.87%** | 90.16%      | 91.06%      | 90.54%      |
+
 
 **XGBoost** achieves the best overall performance across all metrics, reaching ~97.6% accuracy and ~91.9% F1-score for the Churn class — using only 4 engineered features derived exclusively from transaction time series.
 
@@ -60,7 +64,7 @@ Four classifiers are trained with hyperparameters optimized via **Optuna** (5-fo
 └── README.md
 ```
 
-> **Quick view:** [`churn_model.html`](churn_model.html) is a static HTML export of the notebook containing all outputs, visualizations, and results — without source code. You can open it directly in a browser to review the full analysis without running anything.
+> **Quick view:** `[churn_model.html](churn_model.html)` is a static HTML export of the notebook containing all outputs, visualizations, and results — without source code. You can open it directly in a browser to review the full analysis without running anything.
 
 ## Getting Started
 
@@ -108,3 +112,11 @@ Execute all cells sequentially. The notebook covers:
 
 - Python 3.10+
 - See `requirements.txt` for the full dependency list (pandas, numpy, scikit-learn, xgboost, optuna, statsmodels, matplotlib, seaborn)
+
+
+## MLOps Architecture (Production View)
+
+The image below illustrates the proposed MLOps workflow for this project, showing how the churn prediction model can move from the notebook environment to a production-ready setup.  
+It summarizes key stages such as data ingestion, processing and feature engineering, model training and versioning, validation, deployment, and continuous monitoring (model performance and data quality), enabling an ongoing improvement cycle.
+
+<img src="production_diagram_MLOps.png" alt="Production MlOps" style="max-width: 80%; display: block;" />
